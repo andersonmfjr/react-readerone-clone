@@ -1,6 +1,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import GlobalStyle from './styles';
+import Sidebar from './components/Sidebar';
 
 // Main page
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
 
   return (
     <div>
+      <Sidebar />
       <p>Hello World!</p>
       <GlobalStyle />
     </div>
