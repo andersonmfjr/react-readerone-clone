@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import STATIC_CHANNELS from '../../config/static';
-import { extractNameById } from '../../utils/extractId';
+import { extractNameById } from '../../utils/extract';
 
 import {
   Container,

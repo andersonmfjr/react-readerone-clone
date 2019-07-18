@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MainContentLink from '../MainContentLink';
 
-import extract from '../../utils/extractId';
+import { extractIds } from '../../utils/extract';
 import api from '../../config/api';
 
 import { Container, Title, LinksContainer, LinksContainerList } from './styles';
@@ -34,7 +34,7 @@ class MainContent extends Component {
     if (active.id !== 'all') {
       endpoint = `/news/${active.id}?limit=20`;
     } else {
-      const ids = extract(channels);
+      const ids = extractIds(channels);
       endpoint = `/all/${ids.join(',')}?limit=20`;
     }
 
