@@ -1,7 +1,7 @@
 {
-  "name": "react-readone-clone",
+  "name": "react-readerone-clone",
   "version": "1.0.0",
-  "description": "Read One minimal clone writed in ReactJs",
+  "description": "Reader One minimal clone writed in ReactJs",
   "scripts": {
     "start": "webpack-dev-server --hot --open --mode development",
     "build": "webpack --mode production",
