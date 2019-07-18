@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../styles';
 
 export const Container = styled.li`
   padding: 10px;
@@ -8,7 +9,7 @@ export const Container = styled.li`
   z-index: 1;
 
   &:hover {
-    background: #eee;
+    background: ${colors.light};
   }
 
   @media only screen and (max-width: 800px) {
@@ -21,10 +22,10 @@ export const Link = styled.a`
   z-index: 1;
   display: block;
   text-decoration: none;
-  color: #303030;
+  color: ${colors.darker};
 
   &:visited {
-    color: #999;
+    color: ${colors.dark};
   }
 `;
 
@@ -43,7 +44,7 @@ export const LinkTitle = styled.span`
 export const LinkDescription = styled.span`
   font-size: 12px;
   margin: 5px 0 0;
-  color: #999;
+  color: ${colors.dark};
   width: 100%;
   display: inline-block;
   white-space: nowrap;

@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { colors } from '../../styles';
 
 export const Container = styled.aside`
   width: 25%;
   min-width: 200px;
   float: left;
-  color: #666;
-  background-color: #eee;
+  color: ${colors.regular};
+  background-color: ${colors.light};
   height: 100%;
   position: fixed;
   padding-left: 5%;

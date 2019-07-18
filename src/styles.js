@@ -1,5 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
 
+export const colors = {
+  white: '#FFF',
+  lighter: '#F4F4F4',
+  light: '#EEE',
+  regular: '#666',
+  dark: '#999',
+  darker: '#303030',
+  black: '#000',
+  gray: '#222',
+};
+
 // Global Style
 const GlobalStyle = createGlobalStyle`
   * {
@@ -9,10 +20,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: #F4F4F4;
+    background: ${colors.lighter};
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif !important;
     -webkit-font-smoothing: antialiased;
-    color: #222;
+    color: ${colors.gray};
   }
 
   a {
