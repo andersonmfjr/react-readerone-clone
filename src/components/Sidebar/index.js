@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SidebarList from '../SiderbarList';
+import SidebarList from '../SidebarList';
 
 import icon from '../../../public/favicon.png';
 import { Container, Logo } from './styles';
