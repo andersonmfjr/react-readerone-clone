@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SidebarList from '../SidebarList';
 
-import icon from '../../../public/favicon.png';
+import icon from '../../assets/favicon.png';
 import { Container, Logo } from './styles';
 
 const Sidebar = ({ channels, changeChannel, active }) => (
