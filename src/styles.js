@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     background: #F4F4F4;
-    font-family: Open Sans, Segoe UI, Tahoma, sans-serif !important;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif !important;
     -webkit-font-smoothing: antialiased;
     color: #222;
   }
