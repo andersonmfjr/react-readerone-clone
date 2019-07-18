@@ -10,6 +10,10 @@ export const Container = styled.li`
   &:hover {
     background: #eee;
   }
+
+  @media only screen and (max-width: 800px) {
+    padding: 10px 25px 10px 10px;
+  }
 `;
 
 export const Link = styled.a`

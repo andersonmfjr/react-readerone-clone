@@ -22,6 +22,10 @@ export const LinksContainer = styled.div`
   padding: 10px 20px;
   vertical-align: top;
   width: 100%;
+
+  @media only screen and (max-width: 800px) {
+    padding: 10px;
+  }
 `;
 
 export const LinksContainerList = styled.ul`
