@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SidebarList from '../SidebarList';
 
-import icon from '../../assets/favicon.png';
 import { Container, Logo } from './styles';
 
 const Sidebar = ({ channels, changeChannel, active }) => (
   <Container>
     <Logo>
-      <img src={icon} alt="Reader One's Logo" />
+      <img src={require('../../assets/favicon.png')} alt="Reader One's Logo" />
     </Logo>
     <SidebarList
       channels={channels}
