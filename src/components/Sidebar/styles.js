@@ -10,3 +10,14 @@ export const Container = styled.aside`
   position: fixed;
   padding-left: 5%;
 `;
+
+export const Logo = styled.div`
+  height: 100px;
+  margin-left: 18px;
+  padding-top: 30px;
+  opacity: 0.7;
+
+  & img {
+    border: 0;
+  }
+`;
