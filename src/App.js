@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GlobalStyle from './styles';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
+import getWidth from './utils/getWidth';
 
 import STATIC_CHANNELS from './config/static';
 
@@ -10,6 +11,7 @@ export default class App extends Component {
   state = {
     active: { name: 'All In One', id: 'all' },
     channels: STATIC_CHANNELS,
+    viewport: getWidth(),
   };
 
   componentDidMount() {
@@ -27,16 +29,24 @@ export default class App extends Component {
   };
 
   render() {
-    const { active, channels } = this.state;
+    const { active, channels, viewport } = this.state;
 
     return (
       <div>
-        <Sidebar
+        {viewport >= 800 ? (
+          <Sidebar
+            active={active}
+            channels={channels}
+            changeChannel={this.changeActiveChannel}
+          />
+        ) : (
+          ''
+        )}
+        <MainContent
           active={active}
           channels={channels}
           changeChannel={this.changeActiveChannel}
         />
-        <MainContent active={active} channels={channels} />
         <GlobalStyle />
       </div>
     );

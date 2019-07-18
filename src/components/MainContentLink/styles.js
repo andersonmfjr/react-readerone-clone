@@ -39,6 +39,10 @@ export const LinkTitle = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 export const LinkDescription = styled.span`

@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MainContentLink from '../MainContentLink';
+import Sidebar from '../Sidebar';
 
 import { extractIds } from '../../utils/extract';
+import getWidth from '../../utils/getWidth';
 import api from '../../config/api';
 
-import { Container, Title, LinksContainer, LinksContainerList } from './styles';
+import {
+  Container,
+  Title,
+  LinksContainer,
+  LinksContainerList,
+  Menu,
+} from './styles';
 
 class MainContent extends Component {
   state = {
     fetching: false,
     news: [],
+    viewport: getWidth(),
+    menuVisible: false,
   };
 
   async componentDidMount() {
@@ -51,13 +61,32 @@ class MainContent extends Component {
     }
   };
 
+  switchMenu = () => {
+    const { menuVisible } = this.state;
+    this.setState({ menuVisible: !menuVisible });
+  };
+
   render() {
-    const { fetching, news } = this.state;
-    const { active } = this.props;
+    const { fetching, news, viewport, menuVisible } = this.state;
+    const { active, channels, changeChannel } = this.props;
 
     return (
       <Container>
-        <Title>{active.name}</Title>
+        <Title>
+          {active.name}
+          <Menu onClick={this.switchMenu} />
+        </Title>
+
+        {viewport < 800 && menuVisible ? (
+          <Sidebar
+            active={active}
+            channels={channels}
+            changeChannel={changeChannel}
+          />
+        ) : (
+          ''
+        )}
+
         {fetching ? (
           <div>Loading...</div>
         ) : (
@@ -96,6 +125,7 @@ MainContent.propTypes = {
     name: PropTypes.string,
     id: PropTypes.string,
   }),
+  changeChannel: PropTypes.func.isRequired,
   channels: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 

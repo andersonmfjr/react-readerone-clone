@@ -10,6 +10,15 @@ export const Container = styled.aside`
   height: 100%;
   position: fixed;
   padding-left: 5%;
+
+  @media only screen and (max-width: 800px) {
+    display: block;
+    width: 100%;
+    position: relative;
+    padding: 10px;
+    height: auto;
+    background-color: #fafafa;
+  }
 `;
 
 export const Logo = styled.div`
@@ -20,5 +29,9 @@ export const Logo = styled.div`
 
   & img {
     border: 0;
+  }
+
+  @media only screen and (max-width: 800px) {
+    display: none;
   }
 `;
