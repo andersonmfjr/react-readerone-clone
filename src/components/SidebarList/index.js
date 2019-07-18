@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Container, Item, Divider } from './styles';
 
 const SidebarList = ({ channels, changeChannel, active }) => {
-  console.log(active);
   return (
     <Container>
       <Item
