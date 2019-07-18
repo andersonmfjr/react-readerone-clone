@@ -9,6 +9,7 @@ const SidebarList = ({ channels, changeChannel, active }) => {
       <Item
         onClick={() => changeChannel({ name: 'All In One', id: 'all' })}
         active={active.id === 'all'}
+        special
       >
         All in One
       </Item>
@@ -27,7 +28,7 @@ const SidebarList = ({ channels, changeChannel, active }) => {
 
       <Divider />
 
-      <Item>Settings</Item>
+      <Item special>Settings</Item>
     </Container>
   );
 };
