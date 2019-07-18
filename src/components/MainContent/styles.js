@@ -13,3 +13,19 @@ export const Title = styled.h1`
   font-size: 24px;
   line-height: 40px;
 `;
+
+export const LinksContainer = styled.div`
+  border-radius: 5px;
+  position: relative;
+  display: inline-block;
+  text-align: left;
+  padding: 10px 20px;
+  vertical-align: top;
+  width: 100%;
+`;
+
+export const LinksContainerList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`;
