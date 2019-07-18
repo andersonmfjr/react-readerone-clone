@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
-import { hot } from 'react-hot-loader/root';
 import GlobalStyle from './styles';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
 
-import channels from './config/static';
+import STATIC_CHANNELS from './config/static';
 
 // Main page
-class App extends Component {
+export default class App extends Component {
   state = {
     active: { name: 'All In One', id: 'all' },
+    channels: STATIC_CHANNELS,
   };
+
+  componentDidMount() {
+    const channels = localStorage.getItem('channels');
+
+    if (channels && channels.length > 0) {
+      this.setState({ channels: JSON.parse(channels) });
+    } else {
+      localStorage.setItem('channels', JSON.stringify(STATIC_CHANNELS));
+    }
+  }
 
   changeActiveChannel = channel => {
     this.setState({ active: channel });
   };
 
   render() {
-    const { active } = this.state;
+    const { active, channels } = this.state;
 
     return (
       <div>
@@ -26,11 +36,9 @@ class App extends Component {
           channels={channels}
           changeChannel={this.changeActiveChannel}
         />
-        <MainContent active={active} />
+        <MainContent active={active} channels={channels} />
         <GlobalStyle />
       </div>
     );
   }
 }
-
-export default hot(App);
