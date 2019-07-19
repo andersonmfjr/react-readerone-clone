@@ -67,6 +67,32 @@ class MainContent extends Component {
     this.setState({ menuVisible: !menuVisible });
   };
 
+  renderLinks = news => {
+    if (news.length > 0) {
+      return (
+        <>
+          <LinksContainer>
+            <LinksContainerList>
+              {news.map(item => (
+                <MainContentLink
+                  key={item.title}
+                  title={item.title}
+                  url={item.url}
+                  author={item.author}
+                  comments={item.comments}
+                  score={item.score}
+                  source={item.one_sources}
+                />
+              ))}
+            </LinksContainerList>
+          </LinksContainer>
+        </>
+      );
+    }
+
+    return <Message>No data found :(</Message>;
+  };
+
   render() {
     const { fetching, news, viewport, menuVisible } = this.state;
     const { active, channels, changeChannel } = this.props;
@@ -88,27 +114,7 @@ class MainContent extends Component {
           ''
         )}
 
-        {fetching ? (
-          <Message>Loading...</Message>
-        ) : (
-          <>
-            <LinksContainer>
-              <LinksContainerList>
-                {news.map(item => (
-                  <MainContentLink
-                    key={item.title}
-                    title={item.title}
-                    url={item.url}
-                    author={item.author}
-                    comments={item.comments}
-                    score={item.score}
-                    source={item.one_sources}
-                  />
-                ))}
-              </LinksContainerList>
-            </LinksContainer>
-          </>
-        )}
+        {fetching ? <Message>Loading...</Message> : this.renderLinks(news)}
       </Container>
     );
   }
