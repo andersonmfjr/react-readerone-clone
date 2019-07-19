@@ -12,12 +12,25 @@ import {
   LinkDescriptionItem,
 } from './styles';
 
-const MainContentLink = ({ title, author, comments, score, url, source }) => (
+const MainContentLink = ({
+  title,
+  author,
+  comments,
+  score,
+  url,
+  source,
+  category,
+  dept,
+}) => (
   <Container>
     <Link href={url} target="_self">
       {title ? <LinkTitle>{title}</LinkTitle> : ''}
 
       <LinkDescription>
+        {category ? <LinkDescriptionItem>{category}</LinkDescriptionItem> : ''}
+
+        {dept ? <LinkDescriptionItem>{dept}</LinkDescriptionItem> : ''}
+
         {source ? (
           <LinkDescriptionItem>
             {extractNameById(source[0], STATIC_CHANNELS)}
@@ -54,6 +67,8 @@ MainContentLink.defaultProps = {
   score: -1,
   author: '',
   source: '',
+  dept: '',
+  category: '',
 };
 
 MainContentLink.propTypes = {
@@ -66,6 +81,8 @@ MainContentLink.propTypes = {
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string,
   ]),
+  category: PropTypes.string,
+  dept: PropTypes.string,
 };
 
 export default MainContentLink;
