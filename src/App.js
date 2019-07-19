@@ -6,7 +6,6 @@ import getWidth from './utils/getWidth';
 
 import STATIC_CHANNELS from './config/static';
 
-// Main page
 export default class App extends Component {
   state = {
     active: { name: 'All In One', id: 'all' },
@@ -38,7 +37,7 @@ export default class App extends Component {
     const { active, channels, viewport } = this.state;
 
     return (
-      <div>
+      <>
         {viewport >= 800 ? (
           <Sidebar
             active={active}
@@ -56,7 +55,7 @@ export default class App extends Component {
           updateChannels={this.updateChannels}
         />
         <GlobalStyle />
-      </div>
+      </>
     );
   }
 }

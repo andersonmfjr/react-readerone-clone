@@ -22,6 +22,7 @@ class MainContent extends Component {
     news: [],
     viewport: getWidth(),
     menuVisible: false,
+    fetchingError: false,
   };
 
   async componentDidMount() {
@@ -57,8 +58,7 @@ class MainContent extends Component {
 
       this.setState({ news, fetching: false });
     } catch (error) {
-      console.log(error);
-      this.setState({ fetching: false });
+      this.setState({ fetchingError: true, fetching: false });
     }
   };
 
@@ -68,6 +68,8 @@ class MainContent extends Component {
   };
 
   renderLinks = news => {
+    const { fetchingError } = this.state;
+
     if (news.length > 0) {
       return (
         <>
@@ -90,6 +92,10 @@ class MainContent extends Component {
           </LinksContainer>
         </>
       );
+    }
+
+    if (fetchingError) {
+      return <Message>Something went wrong. Sorry :(</Message>;
     }
 
     return <Message>No data found :(</Message>;

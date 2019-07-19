@@ -18,7 +18,7 @@ import {
 } from './styles';
 
 export default class Sidebar extends Component {
-  state = { modalVisible: false };
+  state = { modalVisible: false, localChannels: STATIC_CHANNELS };
 
   toggleModal = () => {
     const { modalVisible } = this.state;
@@ -30,8 +30,22 @@ export default class Sidebar extends Component {
     return !!channels.find(el => el.id === id);
   };
 
+  existsInStaticChannels = id => {
+    const { localChannels } = this.state;
+    return !!localChannels.find(el => el.id === id);
+  };
+
+  createChannel = value => {
+    const id = value.split('-')[0];
+    const name = value.split('-')[1];
+    const order = value.split('-')[2];
+    const channel = { id, name, order };
+    return channel;
+  };
+
   handleInputChange = event => {
     const { updateChannels } = this.props;
+    const { localChannels } = this.state;
     const { target } = event;
     const value = target.checked;
     const { name } = target;
@@ -44,21 +58,28 @@ export default class Sidebar extends Component {
 
       channels.splice(removeIndex, 1);
     } else {
-      const id = name.split('-')[0];
-      const channelName = name.split('-')[1];
-      const order = name.split('-')[2];
-
-      const channel = { id, name: channelName, order };
+      const channel = this.createChannel(name);
       channels.push(channel);
     }
 
     const orderedChannels = channels.sort((a, b) => a.order - b.order);
     localStorage.setItem('channels', JSON.stringify(orderedChannels));
+
+    const channel = this.createChannel(name);
+
+    if (!this.existsInStaticChannels(channel.id)) {
+      this.setState({
+        localChannels: [...localChannels, channel].sort(
+          (a, b) => a.order - b.order
+        ),
+      });
+    }
+
     updateChannels();
   };
 
   render() {
-    const { modalVisible } = this.state;
+    const { modalVisible, localChannels } = this.state;
     const { channels, changeChannel, active } = this.props;
 
     return (
@@ -85,7 +106,7 @@ export default class Sidebar extends Component {
           </ModalHeader>
           <ModalBody>
             <ModalSubtitle>Enabled news sources</ModalSubtitle>
-            {STATIC_CHANNELS.map(channel => (
+            {localChannels.map(channel => (
               <LabelForm key={`label-${channel.id}`} htmlFor={channel.id}>
                 <InputForm
                   name={`${channel.id}-${channel.name}-${channel.order}`}
