@@ -13,6 +13,7 @@ import {
   LinksContainer,
   LinksContainerList,
   Menu,
+  Message,
 } from './styles';
 
 class MainContent extends Component {
@@ -88,7 +89,7 @@ class MainContent extends Component {
         )}
 
         {fetching ? (
-          <div>Loading...</div>
+          <Message>Loading...</Message>
         ) : (
           <>
             <LinksContainer>

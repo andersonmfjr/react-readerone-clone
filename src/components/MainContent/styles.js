@@ -75,3 +75,13 @@ export const Menu = styled.div`
     }
   }
 `;
+
+export const Message = styled.div`
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #999;
+`;
