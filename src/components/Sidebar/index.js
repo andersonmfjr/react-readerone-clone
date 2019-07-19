@@ -107,14 +107,18 @@ export default class Sidebar extends Component {
           <ModalBody>
             <ModalSubtitle>Enabled news sources</ModalSubtitle>
             {localChannels.map(channel => (
-              <LabelForm key={`label-${channel.id}`} htmlFor={channel.id}>
+              <LabelForm
+                key={`label-${channel.id}`}
+                htmlFor={`${channel.id}-${channel.name}-${channel.order}`}
+              >
                 <InputForm
+                  id={`${channel.id}-${channel.name}-${channel.order}`}
                   name={`${channel.id}-${channel.name}-${channel.order}`}
                   type="checkbox"
                   checked={this.existsInLocalStorage(channel.id)}
                   onChange={this.handleInputChange}
                 />
-                <span>{channel.name}</span>
+                {channel.name}
               </LabelForm>
             ))}
           </ModalBody>
