@@ -15,17 +15,23 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    const channels = localStorage.getItem('channels');
-
-    if (channels && channels.length > 0) {
-      this.setState({ channels: JSON.parse(channels) });
-    } else {
-      localStorage.setItem('channels', JSON.stringify(STATIC_CHANNELS));
-    }
+    this.updateChannels();
   }
 
   changeActiveChannel = channel => {
     this.setState({ active: channel });
+  };
+
+  updateChannels = () => {
+    const channels = localStorage.getItem('channels');
+    if (channels && channels.length > 0) {
+      const orderedChannels = JSON.parse(channels).sort(
+        (a, b) => a.order - b.order
+      );
+      this.setState({ channels: orderedChannels });
+    } else {
+      localStorage.setItem('channels', JSON.stringify(STATIC_CHANNELS));
+    }
   };
 
   render() {
@@ -38,6 +44,7 @@ export default class App extends Component {
             active={active}
             channels={channels}
             changeChannel={this.changeActiveChannel}
+            updateChannels={this.updateChannels}
           />
         ) : (
           ''
