@@ -82,6 +82,8 @@ class MainContent extends Component {
                   comments={item.comments}
                   score={item.score}
                   source={item.one_sources}
+                  category={item.category || ''}
+                  dept={item.dept || ''}
                 />
               ))}
             </LinksContainerList>
