@@ -53,6 +53,7 @@ export default class App extends Component {
           active={active}
           channels={channels}
           changeChannel={this.changeActiveChannel}
+          updateChannels={this.updateChannels}
         />
         <GlobalStyle />
       </div>

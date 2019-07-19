@@ -97,7 +97,7 @@ class MainContent extends Component {
 
   render() {
     const { fetching, news, viewport, menuVisible } = this.state;
-    const { active, channels, changeChannel } = this.props;
+    const { active, channels, changeChannel, updateChannels } = this.props;
 
     return (
       <Container>
@@ -111,6 +111,7 @@ class MainContent extends Component {
             active={active}
             channels={channels}
             changeChannel={changeChannel}
+            updateChannels={updateChannels}
           />
         ) : (
           ''
@@ -136,6 +137,7 @@ MainContent.propTypes = {
   }),
   changeChannel: PropTypes.func.isRequired,
   channels: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  updateChannels: PropTypes.func.isRequired,
 };
 
 export default MainContent;
