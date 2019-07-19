@@ -169,11 +169,11 @@ module.exports = (env, argv) => {
       }),
       /* eslint-disable camelcase */
       new WebpackPwaManifest({
-        name: 'Hello World',
-        short_name: 'Hello World',
-        description: 'Styled React Boilerplate Demo',
-        theme_color: '#212121',
-        background_color: '#212121',
+        name: 'One App',
+        short_name: 'One App',
+        description: 'Reader One minimal clone writed in ReactJs',
+        theme_color: '#333',
+        background_color: '#f4f4f4',
         icons: [
           {
             src: path.resolve('public/favicon.png'),

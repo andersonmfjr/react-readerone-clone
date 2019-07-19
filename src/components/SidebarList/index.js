@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Container, Item, Divider } from './styles';
 
-const SidebarList = ({ channels, changeChannel, active }) => {
+const SidebarList = ({ channels, changeChannel, active, toggleModal }) => {
   return (
     <Container>
       <Item
@@ -28,7 +28,9 @@ const SidebarList = ({ channels, changeChannel, active }) => {
 
       <Divider />
 
-      <Item special>Settings</Item>
+      <Item onClick={toggleModal} special>
+        Settings
+      </Item>
     </Container>
   );
 };
@@ -52,6 +54,7 @@ SidebarList.propTypes = {
     name: PropTypes.string,
     id: PropTypes.string,
   }),
+  toggleModal: PropTypes.func.isRequired,
 };
 
 export default SidebarList;

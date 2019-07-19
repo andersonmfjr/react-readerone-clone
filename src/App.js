@@ -6,7 +6,6 @@ import getWidth from './utils/getWidth';
 
 import STATIC_CHANNELS from './config/static';
 
-// Main page
 export default class App extends Component {
   state = {
     active: { name: 'All In One', id: 'all' },
@@ -15,29 +14,36 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    const channels = localStorage.getItem('channels');
-
-    if (channels && channels.length > 0) {
-      this.setState({ channels: JSON.parse(channels) });
-    } else {
-      localStorage.setItem('channels', JSON.stringify(STATIC_CHANNELS));
-    }
+    this.updateChannels();
   }
 
   changeActiveChannel = channel => {
     this.setState({ active: channel });
   };
 
+  updateChannels = () => {
+    const channels = localStorage.getItem('channels');
+    if (channels && channels.length > 0) {
+      const orderedChannels = JSON.parse(channels).sort(
+        (a, b) => a.order - b.order
+      );
+      this.setState({ channels: orderedChannels });
+    } else {
+      localStorage.setItem('channels', JSON.stringify(STATIC_CHANNELS));
+    }
+  };
+
   render() {
     const { active, channels, viewport } = this.state;
 
     return (
-      <div>
+      <>
         {viewport >= 800 ? (
           <Sidebar
             active={active}
             channels={channels}
             changeChannel={this.changeActiveChannel}
+            updateChannels={this.updateChannels}
           />
         ) : (
           ''
@@ -46,9 +52,10 @@ export default class App extends Component {
           active={active}
           channels={channels}
           changeChannel={this.changeActiveChannel}
+          updateChannels={this.updateChannels}
         />
         <GlobalStyle />
-      </div>
+      </>
     );
   }
 }

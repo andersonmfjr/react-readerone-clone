@@ -13,6 +13,7 @@ import {
   LinksContainer,
   LinksContainerList,
   Menu,
+  Message,
 } from './styles';
 
 class MainContent extends Component {
@@ -21,6 +22,7 @@ class MainContent extends Component {
     news: [],
     viewport: getWidth(),
     menuVisible: false,
+    fetchingError: false,
   };
 
   async componentDidMount() {
@@ -56,8 +58,7 @@ class MainContent extends Component {
 
       this.setState({ news, fetching: false });
     } catch (error) {
-      console.log(error);
-      this.setState({ fetching: false });
+      this.setState({ fetchingError: true, fetching: false });
     }
   };
 
@@ -66,9 +67,43 @@ class MainContent extends Component {
     this.setState({ menuVisible: !menuVisible });
   };
 
+  renderLinks = news => {
+    const { fetchingError } = this.state;
+
+    if (news.length > 0) {
+      return (
+        <>
+          <LinksContainer>
+            <LinksContainerList>
+              {news.map(item => (
+                <MainContentLink
+                  key={item.title}
+                  title={item.title}
+                  url={item.url}
+                  author={item.author}
+                  comments={item.comments}
+                  score={item.score}
+                  source={item.one_sources}
+                  category={item.category || ''}
+                  dept={item.dept || ''}
+                />
+              ))}
+            </LinksContainerList>
+          </LinksContainer>
+        </>
+      );
+    }
+
+    if (fetchingError) {
+      return <Message>Something went wrong. Sorry :(</Message>;
+    }
+
+    return <Message>No data found :(</Message>;
+  };
+
   render() {
     const { fetching, news, viewport, menuVisible } = this.state;
-    const { active, channels, changeChannel } = this.props;
+    const { active, channels, changeChannel, updateChannels } = this.props;
 
     return (
       <Container>
@@ -82,32 +117,13 @@ class MainContent extends Component {
             active={active}
             channels={channels}
             changeChannel={changeChannel}
+            updateChannels={updateChannels}
           />
         ) : (
           ''
         )}
 
-        {fetching ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            <LinksContainer>
-              <LinksContainerList>
-                {news.map(item => (
-                  <MainContentLink
-                    key={item.title}
-                    title={item.title}
-                    url={item.url}
-                    author={item.author}
-                    comments={item.comments}
-                    score={item.score}
-                    source={item.one_sources}
-                  />
-                ))}
-              </LinksContainerList>
-            </LinksContainer>
-          </>
-        )}
+        {fetching ? <Message>Loading...</Message> : this.renderLinks(news)}
       </Container>
     );
   }
@@ -127,6 +143,7 @@ MainContent.propTypes = {
   }),
   changeChannel: PropTypes.func.isRequired,
   channels: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  updateChannels: PropTypes.func.isRequired,
 };
 
 export default MainContent;
